@@ -1,6 +1,8 @@
 import express from 'express'
 import url from "url"
 import path from "path"
+import http from 'http'
+import { Server } from "socket.io"
 
 const app = express()
 const port = process.env.SERVER_PORT || 3000 
@@ -10,6 +12,14 @@ const publicPath = path.join(currentPath, '../../public')
 
 app.use(express.static(publicPath))
 
-app.listen(port, () => {
+const serverHttp = http.createServer(app)
+
+serverHttp.listen(port, () => {
   console.log(`Server is running on port ${port}`)
+})
+
+const io = new Server(serverHttp)
+
+io.on('connection', () => {
+  console.log('A user connected')
 })
