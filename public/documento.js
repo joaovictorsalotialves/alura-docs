@@ -1,11 +1,13 @@
-const socket = io()
+import { sendTextChange } from "./socket-front-documento.js"
 
 const textArea = document.getElementById('editor-texto')
 
 textArea.addEventListener('keyup', () => {
-  socket.emit('text_change', textArea.value)
+  sendTextChange(textArea.value)
 })
 
-socket.on('text_change_client', (text) => {
+function updateTextArea(text) {
   textArea.value = text
-})
+}
+
+export { updateTextArea }
