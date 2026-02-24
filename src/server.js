@@ -18,8 +18,4 @@ serverHttp.listen(port, () => {
   console.log(`Server is running on port ${port}`)
 })
 
-const io = new Server(serverHttp)
-
-io.on('connection', () => {
-  console.log('A user connected')
-})
+export const io = new Server(serverHttp)
