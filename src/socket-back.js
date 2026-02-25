@@ -7,7 +7,7 @@ io.on('connection', (socket) => {
     socket.join(nameDocument)
   })
 
-  socket.on('text_change', (text) => {
-    socket.broadcast.emit('text_change_client', text)
+  socket.on('text_change', ({ text, nameDocument }) => {
+    socket.to(nameDocument).emit('text_change_client', text)
   })
 })

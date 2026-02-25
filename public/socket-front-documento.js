@@ -6,8 +6,8 @@ function selectDocument(nameDocument) {
   socket.emit('select_document', nameDocument)
 }
 
-function sendTextChange(text) {
-  socket.emit('text_change', text)
+function sendTextChange(dados) {
+  socket.emit('text_change', dados)
 }
 
 socket.on('text_change_client', (text) => {

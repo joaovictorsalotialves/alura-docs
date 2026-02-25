@@ -11,7 +11,10 @@ titleDocument.textContent = nameDocument || 'Documento sem título'
 selectDocument(nameDocument)
 
 textArea.addEventListener('keyup', () => {
-  sendTextChange(textArea.value)
+  sendTextChange({ 
+    text: textArea.value, 
+    nameDocument
+  })
 })
 
 function updateTextArea(text) {
