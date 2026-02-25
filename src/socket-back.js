@@ -18,15 +18,24 @@ const documents = [
 io.on('connection', (socket) => {
   console.log('A user connected! ID: ', socket.id)
 
-  socket.on('select_document', (nameDocument) => {
+  socket.on('select_document', (nameDocument, returnText) => {
+    socket.join(nameDocument)
+
     const document = findDocument(nameDocument)
 
-    console.log(document)
-
-    socket.join(nameDocument)
+    if (document) {
+      // socket.emit('text_document', document.text)
+      returnText(document.text)
+    }
   })
 
   socket.on('text_change', ({ text, nameDocument }) => {
+    const document = findDocument(nameDocument)
+
+    if (document) {
+      document.text = text
+    }
+
     socket.to(nameDocument).emit('text_change_client', text)
   })
 })
