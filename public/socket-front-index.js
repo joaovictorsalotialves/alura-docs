@@ -7,3 +7,13 @@ socket.emit('get_documents', (documents) => {
     insertLinkDocument(document.name)
   })
 })
+
+function addDocument(nameDocument) {
+  socket.emit('add_document', nameDocument)
+}
+
+socket.on('add_document_client', (nameDocument) => {
+  insertLinkDocument(nameDocument)
+})
+
+export { addDocument }
