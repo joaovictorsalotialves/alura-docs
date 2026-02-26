@@ -1,5 +1,9 @@
 import { documentsCollection } from './dbConnect.js'
 
+function getDocuments() {
+  return documentsCollection.find().toArray()
+}
+
 function findDocument(nameDocument) {
   const document = documentsCollection.findOne({ name: nameDocument })
 
@@ -16,4 +20,4 @@ function updateDocument(nameDocument, text) {
   return update
 }
 
-export { findDocument, updateDocument }
+export { findDocument, updateDocument, getDocuments }
