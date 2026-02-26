@@ -1,5 +1,5 @@
-import { documentsCollection } from './dbConnect.js'
 import { io } from './server.js'
+import { findDocument, updateDocument } from './documentsDb.js'
 
 io.on('connection', (socket) => {
   console.log('A user connected! ID: ', socket.id)
@@ -15,19 +15,11 @@ io.on('connection', (socket) => {
     }
   })
 
-  socket.on('text_change', ({ text, nameDocument }) => {
-    const document = findDocument(nameDocument)
+  socket.on('text_change', async ({ text, nameDocument }) => {
+    const update = await updateDocument(nameDocument, text)
 
-    if (document) {
-      document.text = text
+    if (update.modifiedCount) {
+      socket.to(nameDocument).emit('text_change_client', text)
     }
-
-    socket.to(nameDocument).emit('text_change_client', text)
   })
 })
-
-function findDocument(nameDocument) {
-  const document = documentsCollection.findOne({ name: nameDocument })
-
-  return document
-}
