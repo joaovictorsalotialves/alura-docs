@@ -26,4 +26,11 @@ buttonDelete.addEventListener('click', () => {
   deleteDocument(nameDocument)
 })
 
-export { updateTextArea }
+function alertAndRedirect(name) {
+  if (name === nameDocument) {
+    alert(`O documento "${name}" foi excluído.`)
+    window.location.href = '/'
+  }
+}
+
+export { updateTextArea, alertAndRedirect }

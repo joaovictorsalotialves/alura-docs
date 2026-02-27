@@ -1,4 +1,4 @@
-import { updateTextArea } from "./documento.js"
+import { alertAndRedirect, updateTextArea } from "./documento.js"
 
 const socket = io()
 
@@ -23,5 +23,9 @@ socket.on('text_change_client', (text) => {
 function deleteDocument(nameDocument) {
   socket.emit('delete_document', nameDocument)
 }
+
+socket.on('delete_document_success', (nameDocument) => {
+  alertAndRedirect(nameDocument)
+})
 
 export { sendTextChange, selectDocument, deleteDocument }
