@@ -16,4 +16,8 @@ socket.on('add_document_client', (nameDocument) => {
   insertLinkDocument(nameDocument)
 })
 
+socket.on('document_exists', (nameDocument) => {
+  alert(`O documento ${nameDocument} já existe!`)
+})
+
 export { addDocument }

@@ -9,6 +9,13 @@ io.on('connection', (socket) => {
   })
 
   socket.on('add_document', async (nameDocument) => {
+    const documentExists = (await findDocument(nameDocument)) !== null
+
+    if (documentExists) {
+      socket.emit('document_exists', nameDocument)
+      return
+    }
+
     const result = await addDocument(nameDocument)
 
     if (result.acknowledged) {
