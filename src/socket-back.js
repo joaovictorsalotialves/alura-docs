@@ -1,5 +1,5 @@
 import { io } from './server.js'
-import { findDocument, updateDocument, getDocuments, addDocument } from './documentsDb.js'
+import { findDocument, updateDocument, getDocuments, addDocument, deleteDocument } from './documentsDb.js'
 
 io.on('connection', (socket) => {
   socket.on('get_documents', async (returnDocuments) => {
@@ -40,5 +40,9 @@ io.on('connection', (socket) => {
     if (update.modifiedCount) {
       socket.to(nameDocument).emit('text_change_client', text)
     }
+  })
+
+  socket.on('delete_document', async (nameDocument) => {
+    const result = await deleteDocument(nameDocument)
   })
 })

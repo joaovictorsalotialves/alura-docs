@@ -20,4 +20,8 @@ socket.on('text_change_client', (text) => {
   updateTextArea(text)
 })
 
-export { sendTextChange, selectDocument }
+function deleteDocument(nameDocument) {
+  socket.emit('delete_document', nameDocument)
+}
+
+export { sendTextChange, selectDocument, deleteDocument }

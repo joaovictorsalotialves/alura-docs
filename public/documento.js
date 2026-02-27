@@ -1,10 +1,11 @@
-import { selectDocument, sendTextChange } from "./socket-front-documento.js"
+import { selectDocument, sendTextChange, deleteDocument } from "./socket-front-documento.js"
 
 const params = new URLSearchParams(window.location.search)
 const nameDocument = params.get('nome')
 
 const textArea = document.getElementById('editor-texto')
 const titleDocument = document.getElementById('titulo-documento')
+const buttonDelete = document.getElementById('excluir-documento')
 
 titleDocument.textContent = nameDocument || 'Documento sem título'
 
@@ -20,5 +21,9 @@ textArea.addEventListener('keyup', () => {
 function updateTextArea(text) {
   textArea.value = text
 }
+
+buttonDelete.addEventListener('click', () => {
+  deleteDocument(nameDocument)
+})
 
 export { updateTextArea }
