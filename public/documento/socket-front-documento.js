@@ -12,10 +12,6 @@ function sendTextChange(dados) {
   socket.emit('text_change', dados)
 }
 
-// socket.on('text_document', (text) => {
-//   updateTextArea(text)
-// })
-
 socket.on('text_change_client', (text) => {
   updateTextArea(text)
 })
