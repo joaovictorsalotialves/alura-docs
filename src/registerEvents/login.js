@@ -1,5 +1,6 @@
 import { findUser } from "../db/usersDb.js"
 import authenticateUser from "../utils/authenticateUser.js"
+import createJWT from "../utils/createJWT.js"
 
 export default function registerEventsLogin(socket, io) {
   socket.on('authenticate_user', async ({ username, password }) => {
@@ -13,7 +14,9 @@ export default function registerEventsLogin(socket, io) {
     const authenticate = authenticateUser(password, user)
 
     if (authenticate) {
-      socket.emit('authenticated_success')
+      const token = createJWT({ username })
+
+      socket.emit('authenticated_success', token)
       return
     } 
     
