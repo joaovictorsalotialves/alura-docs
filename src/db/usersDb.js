@@ -1,3 +1,4 @@
+import hashPasswordWithSalt from "../utils/hashPasswordWithSalt.js"
 import { usersCollection } from "./dbConnect.js"
 
 function findUser(username) {
@@ -5,7 +6,9 @@ function findUser(username) {
 }
 
 function registerUser({ username, password }) {
-  return usersCollection.insertOne({ username, password })
+  const { hashPassword, salt } = hashPasswordWithSalt(password)
+
+  return usersCollection.insertOne({ username, hashPassword, salt })
 }
 
 export { findUser, registerUser }
