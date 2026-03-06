@@ -2,6 +2,11 @@ import { insertLinkDocument, removeLinkDocument } from './index.js'
 
 const socket = io()
 
+socket.on('connect_error', (error) => {
+  alert(error)
+  window.location.href = '/login/index.html'
+})
+
 socket.emit('get_documents', (documents) => {
   documents.forEach(document => {
     insertLinkDocument(document.name)
