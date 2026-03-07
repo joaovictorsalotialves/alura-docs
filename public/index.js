@@ -1,9 +1,5 @@
 import { addDocument } from './socket-front-index.js'
-import { getCookie, removeCookie } from './utils/cookies.js'
-
-const token = getCookie('auth_token')
-
-console.log(token)
+import { removeCookie } from './utils/cookies.js'
 
 const listDocuments = document.getElementById('lista-documentos')
 const form = document.getElementById('form-adiciona-documento')

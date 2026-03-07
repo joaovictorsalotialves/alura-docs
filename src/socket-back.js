@@ -9,11 +9,16 @@ import authorizeUser from './middlewares/authorizeUser.js'
 
 import { io } from './server.js'
 
-io.use(authorizeUser)
+const nspUsers = io.of('/users')
 
-io.on('connection', (socket) => {
+nspUsers.use(authorizeUser)
+
+nspUsers.on('connection', (socket) => {
+  registerEventsStart(socket, nspUsers)
+  registerEventsDocuments(socket, nspUsers)
+})
+
+io.of('/').on('connection', (socket) => {
   registerEventsLogin(socket, io)
   registerEventsRegister(socket, io)
-  registerEventsStart(socket, io)
-  registerEventsDocuments(socket, io)
 })

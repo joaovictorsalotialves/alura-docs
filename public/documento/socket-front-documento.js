@@ -1,6 +1,16 @@
 import { alertAndRedirect, updateTextArea } from "./documento.js"
+import { getCookie } from '../utils/cookies.js'
 
-const socket = io()
+const socket = io('/users', {
+  auth: {
+    token: getCookie('auth_token')
+  }
+})
+
+socket.on('connect_error', (error) => {
+  alert(error)
+  window.location.href = '/login/index.html'
+})
 
 function selectDocument(nameDocument) {
   socket.emit('select_document', nameDocument, (text) => {
