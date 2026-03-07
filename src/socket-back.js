@@ -12,8 +12,8 @@ import { io } from './server.js'
 io.use(authorizeUser)
 
 io.on('connection', (socket) => {
+  registerEventsLogin(socket, io)
+  registerEventsRegister(socket, io)
   registerEventsStart(socket, io)
   registerEventsDocuments(socket, io)
-  registerEventsRegister(socket, io)
-  registerEventsLogin(socket, io)
 })

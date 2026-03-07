@@ -1,6 +1,11 @@
 import { insertLinkDocument, removeLinkDocument } from './index.js'
+import { getCookie } from './utils/cookies.js'
 
-const socket = io()
+const socket = io({
+  auth: {
+    token: getCookie('auth_token')
+  }
+})
 
 socket.on('connect_error', (error) => {
   alert(error)
