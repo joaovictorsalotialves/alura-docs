@@ -9,7 +9,10 @@ const buttonDelete = document.getElementById('excluir-documento')
 
 titleDocument.textContent = nameDocument || 'Documento sem título'
 
-selectDocument(nameDocument)
+
+function treatAuthorizationSuccess (payloadToken) {
+  selectDocument({nameDocument, username: payloadToken.username})
+}
 
 textArea.addEventListener('keyup', () => {
   sendTextChange({ 
@@ -33,4 +36,4 @@ function alertAndRedirect(name) {
   }
 }
 
-export { updateTextArea, alertAndRedirect }
+export { updateTextArea, alertAndRedirect, treatAuthorizationSuccess }

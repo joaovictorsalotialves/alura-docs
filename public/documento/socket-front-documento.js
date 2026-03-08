@@ -1,4 +1,4 @@
-import { alertAndRedirect, updateTextArea } from "./documento.js"
+import { alertAndRedirect, treatAuthorizationSuccess, updateTextArea } from "./documento.js"
 import { getCookie } from '../utils/cookies.js'
 
 const socket = io('/users', {
@@ -7,13 +7,15 @@ const socket = io('/users', {
   }
 })
 
+socket.on('authorization_success', treatAuthorizationSuccess)
+
 socket.on('connect_error', (error) => {
   alert(error)
   window.location.href = '/login/index.html'
 })
 
-function selectDocument(nameDocument) {
-  socket.emit('select_document', nameDocument, (text) => {
+function selectDocument(data) {
+  socket.emit('select_document', data, (text) => {
     updateTextArea(text)
   })
 }

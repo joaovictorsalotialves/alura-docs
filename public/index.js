@@ -32,8 +32,6 @@ function insertLinkDocument(nameDocument) {
 function removeLinkDocument(nameDocument) {
   const linkDocument = document.getElementById(`document-${nameDocument}`)
 
-  console.log(linkDocument)
-
   listDocuments.removeChild(linkDocument)
 }
 

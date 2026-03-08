@@ -1,7 +1,7 @@
 import { findDocument, updateDocument, deleteDocument } from '../db/documentsDb.js'
 
 export default function registerEventsDocuments(socket, io) {
-  socket.on('select_document', async (nameDocument, returnText) => {
+  socket.on('select_document', async ({ nameDocument, username }, returnText) => {
     socket.join(nameDocument)
 
     const document = await findDocument(nameDocument)
