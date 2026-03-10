@@ -9,7 +9,6 @@ const buttonDelete = document.getElementById('excluir-documento')
 
 titleDocument.textContent = nameDocument || 'Documento sem título'
 
-
 function treatAuthorizationSuccess (payloadToken) {
   selectDocument({nameDocument, username: payloadToken.username})
 }

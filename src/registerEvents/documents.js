@@ -1,17 +1,24 @@
 import { findDocument, updateDocument, deleteDocument } from '../db/documentsDb.js'
+import { addConection, getUsersInDocument } from '../utils/conectionsDocuments.js'
 
 export default function registerEventsDocuments(socket, io) {
   socket.on('select_document', async ({ nameDocument, username }, returnText) => {
-    socket.join(nameDocument)
-
     const document = await findDocument(nameDocument)
 
     if (document) {
+      socket.join(nameDocument)
+
+      addConection({ nameDocument, username })
+
+      const usersInDocument = getUsersInDocument(nameDocument)
+
+      console.log(usersInDocument)
+
       returnText(document.text)
     }
   })
 
-  socket.on('text_change', async ({ text, nameDocument }) => {
+  socket.on('text_change', async ({ text, nameDocument }) => { 
     const update = await updateDocument(nameDocument, text)
 
     if (update.modifiedCount) {

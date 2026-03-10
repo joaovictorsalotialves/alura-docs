@@ -12,6 +12,4 @@ export default function authorizeUser(socket, next) {
   } catch (error) {
     next(error)
   }
-
-  next()
 }
