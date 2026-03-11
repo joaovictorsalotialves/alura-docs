@@ -12,7 +12,7 @@ export default function registerEventsDocuments(socket, io) {
 
       const usersInDocument = getUsersInDocument(nameDocument)
 
-      console.log(usersInDocument)
+      io.to(nameDocument).emit('users_in_document', usersInDocument)
 
       returnText(document.text)
     }

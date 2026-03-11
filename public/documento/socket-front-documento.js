@@ -1,4 +1,4 @@
-import { alertAndRedirect, treatAuthorizationSuccess, updateTextArea } from "./documento.js"
+import { alertAndRedirect, treatAuthorizationSuccess, updateInterfaceUsers, updateTextArea } from "./documento.js"
 import { getCookie } from '../utils/cookies.js'
 
 const socket = io('/users', {
@@ -19,6 +19,8 @@ function selectDocument(data) {
     updateTextArea(text)
   })
 }
+
+socket.on('users_in_document', updateInterfaceUsers)
 
 function sendTextChange(dados) {
   socket.emit('text_change', dados)

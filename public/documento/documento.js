@@ -6,11 +6,22 @@ const nameDocument = params.get('nome')
 const textArea = document.getElementById('editor-texto')
 const titleDocument = document.getElementById('titulo-documento')
 const buttonDelete = document.getElementById('excluir-documento')
+const listUsersInDocuments = document.getElementById('usuarios-conectados')
 
 titleDocument.textContent = nameDocument || 'Documento sem título'
 
 function treatAuthorizationSuccess (payloadToken) {
   selectDocument({nameDocument, username: payloadToken.username})
+}
+
+function updateInterfaceUsers(usersInDocument) {
+  listUsersInDocuments.innerHTML = ''
+
+  usersInDocument.forEach(user => {
+    listUsersInDocuments.innerHTML += `
+      <li class="list-group-item">${user}</li>
+    `
+  })
 }
 
 textArea.addEventListener('keyup', () => {
@@ -35,4 +46,4 @@ function alertAndRedirect(name) {
   }
 }
 
-export { updateTextArea, alertAndRedirect, treatAuthorizationSuccess }
+export { updateTextArea, alertAndRedirect, treatAuthorizationSuccess, updateInterfaceUsers }
