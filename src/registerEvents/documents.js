@@ -1,5 +1,5 @@
 import { findDocument, updateDocument, deleteDocument } from '../db/documentsDb.js'
-import { addConection, getUsersInDocument } from '../utils/conectionsDocuments.js'
+import { addConection, getUsersInDocument, removeConection } from '../utils/conectionsDocuments.js'
 
 export default function registerEventsDocuments(socket, io) {
   socket.on('select_document', async ({ nameDocument, username }, returnText) => {
@@ -34,7 +34,11 @@ export default function registerEventsDocuments(socket, io) {
     })
 
     socket.on('disconnect', () => {
-      console.log(`Cliente ${socket.id} foi desconectado`)
+      removeConection(nameDocument, username)
+
+      const usersInDocument = getUsersInDocument(nameDocument)
+
+      io.to(nameDocument).emit('users_in_document', usersInDocument)
     })
   })
 }

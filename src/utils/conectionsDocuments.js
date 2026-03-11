@@ -10,4 +10,16 @@ function getUsersInDocument(nameDocument) {
     .map((conection) => conection.username)
 }
 
-export { addConection, getUsersInDocument }
+function removeConection(nameDocument, username) {
+  const index = conectionsDocuments.findIndex((conection) => {
+    return conection.nameDocument === nameDocument && conection.username === username
+  })
+
+  if (index !== -1) {
+    conectionsDocuments.splice(index, 1)
+  }
+
+  console.log(conectionsDocuments)
+}
+
+export { addConection, getUsersInDocument, removeConection }
