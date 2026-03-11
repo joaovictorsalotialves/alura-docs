@@ -1,20 +1,30 @@
 import { findDocument, updateDocument, deleteDocument } from '../db/documentsDb.js'
-import { addConection, getUsersInDocument, removeConection } from '../utils/conectionsDocuments.js'
+import { addConection, getUsersInDocument, removeConection, findConection } from '../utils/conectionsDocuments.js'
 
 export default function registerEventsDocuments(socket, io) {
   socket.on('select_document', async ({ nameDocument, username }, returnText) => {
     const document = await findDocument(nameDocument)
 
     if (document) {
-      socket.join(nameDocument)
+      const conectionExisting = findConection(nameDocument, username)
 
-      addConection({ nameDocument, username })
+      if (!conectionExisting) {
+        socket.join(nameDocument)
 
-      const usersInDocument = getUsersInDocument(nameDocument)
+        addConection({ nameDocument, username })
 
-      io.to(nameDocument).emit('users_in_document', usersInDocument)
+        socket.data = {
+          userIn: true
+        }
 
-      returnText(document.text)
+        const usersInDocument = getUsersInDocument(nameDocument)
+
+        io.to(nameDocument).emit('users_in_document', usersInDocument)
+
+        returnText(document.text)
+      } else {
+        socket.emit('user_is_already_document')
+      }
     }
 
     socket.on('text_change', async ({ text, nameDocument }) => { 
@@ -34,11 +44,13 @@ export default function registerEventsDocuments(socket, io) {
     })
 
     socket.on('disconnect', () => {
-      removeConection(nameDocument, username)
-
-      const usersInDocument = getUsersInDocument(nameDocument)
-
-      io.to(nameDocument).emit('users_in_document', usersInDocument)
+      if (socket.data.userIn) {
+        removeConection(nameDocument, username)
+  
+        const usersInDocument = getUsersInDocument(nameDocument)
+  
+        io.to(nameDocument).emit('users_in_document', usersInDocument)
+      }
     })
   })
 }

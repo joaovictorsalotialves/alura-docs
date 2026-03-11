@@ -18,8 +18,12 @@ function removeConection(nameDocument, username) {
   if (index !== -1) {
     conectionsDocuments.splice(index, 1)
   }
-
-  console.log(conectionsDocuments)
 }
 
-export { addConection, getUsersInDocument, removeConection }
+function findConection(nameDocument, username) {
+  return conectionsDocuments.find((conection) => {
+    return conection.nameDocument === nameDocument && conection.username === username
+  })
+}
+
+export { addConection, getUsersInDocument, removeConection, findConection }

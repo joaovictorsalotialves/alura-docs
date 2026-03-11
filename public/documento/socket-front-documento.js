@@ -20,6 +20,11 @@ function selectDocument(data) {
   })
 }
 
+socket.on('user_is_already_document', () => {
+  alert('Documento já aberto em outra aba')
+  window.location.href = '/'
+})
+
 socket.on('users_in_document', updateInterfaceUsers)
 
 function sendTextChange(dados) {
