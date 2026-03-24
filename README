@@ -1,0 +1,98 @@
+# 📄 Alura Docs
+
+O **Alura Docs** é uma aplicação para **compartilhamento de arquivos em tempo real**, utilizando **WebSockets** para comunicação instantânea entre clientes. O projeto foi desenvolvido com **JavaScript**, com foco em aprendizado de comunicação bidirecional e colaboração em tempo real.
+
+---
+
+## 🚀 Funcionalidades
+
+* 📡 Comunicação em tempo real com WebSockets
+* 📂 Compartilhamento de arquivos entre usuários
+* ✏️ Atualização instantânea de conteúdo
+* 👥 Suporte a múltiplos usuários conectados simultaneamente
+* 🔄 Sincronização automática entre clientes
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+* JavaScript
+* Node.js
+* WebSocket (Socket.IO)
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+alura-docs/
+│
+├── src/           # Configuração do servidor e WebSocket
+├── public/        # Arquivos estáticos (HTML, CSS, JS)
+├── .env           # variaveis de ambiente
+└── package.json   # Dependências e scripts
+```
+
+---
+
+## ⚙️ Como Executar o Projeto
+
+1. Clone o repositório:
+
+```bash
+git clone https://github.com/seu-usuario/alura-docs.git
+```
+
+2. Acesse a pasta do projeto:
+
+```bash
+cd alura-docs
+```
+
+3. Instale as dependências:
+
+```bash
+npm install
+```
+
+4. Execute a aplicação:
+
+```bash
+npm run dev
+```
+
+5. Acesse no navegador:
+
+```
+http://localhost:3000
+```
+
+---
+
+## 📡 Como Funciona
+
+O projeto utiliza WebSockets para estabelecer uma conexão persistente entre cliente e servidor, permitindo que eventos sejam enviados e recebidos em tempo real. Sempre que um usuário realiza uma ação (como enviar ou atualizar um arquivo), essa informação é transmitida instantaneamente para os demais usuários conectados.
+
+---
+
+## 🎯 Objetivo
+
+Este projeto tem como objetivo demonstrar na prática:
+
+* Comunicação em tempo real
+* Arquitetura baseada em eventos
+* Sincronização de dados entre múltiplos clientes
+
+---
+
+## 📌 Possíveis Melhorias
+
+* 📎 Upload de arquivos reais
+* 📝 Histórico de alterações
+* 🚀 Deploy em ambiente cloud
+
+---
+
+## 📄 Licença
+
+Este projeto é de uso educacional e foi desenvolvido durante estudos na plataforma Alura.
